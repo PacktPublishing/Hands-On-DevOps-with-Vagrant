@@ -1,0 +1,10 @@
+Vagrant.configure("2") do |config|
+
+  config.vm.box = "ubuntu/xenial64"
+
+  config.vm.provision :shell do |shell|
+      shell.inline = "echo $1 $2"
+      shell.args = ["this is", "a test"]
+  end
+
+end

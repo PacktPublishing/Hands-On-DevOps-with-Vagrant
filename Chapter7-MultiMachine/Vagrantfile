@@ -1,0 +1,21 @@
+Vagrant.configure("2") do |config|
+
+  # Configure web server machine
+  config.vm.define "web1" do |web1|
+    web1.vm.box = "ubuntu/xenial64"
+    web1.vm.network "private_network", ip: "10.0.0.50"
+    web1.vm.provision :shell do |shell|
+      shell.path = "web.sh"
+    end
+  end
+
+  # Configure database server machine
+  config.vm.define "db1" do |db1|
+    db1.vm.box = "ubuntu/xenial64"
+    db1.vm.network "private_network", ip: "10.0.0.51"
+    db1.vm.provision :shell do |shell|
+      shell.path = "db.sh"
+    end
+  end
+
+end
