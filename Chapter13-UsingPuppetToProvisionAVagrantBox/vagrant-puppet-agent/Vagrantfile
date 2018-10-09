@@ -1,0 +1,48 @@
+Vagrant.configure("2") do |config|
+  config.vm.box = "ubuntu/xenial64"
+  # Puppet master configuration
+  config.vm.define "puppetmaster" do |pm|
+    pm.vm.provider "virtualbox" do |v|
+      v.memory = 2048
+      v.cpus = 2
+    end
+    pm.vm.network "private_network", ip: "10.10.10.11"
+    pm.vm.provision "shell", :inline => <<-SHELL
+      sudo echo "10.10.10.11 master.example.com" | sudo tee -a /etc/hosts
+      sudo echo "10.10.10.12 node.example.com" | sudo tee -a /etc/hosts
+      wget https://apt.puppetlabs.com/puppetlabs-release-pc1-xenial.deb
+      sudo dpkg -i puppetlabs-release-pc1-xenial.deb
+      sudo apt-get update -y
+      sudo apt-get install -y puppetserver
+      sudo awk '{sub(/-Xms2g -Xmx2g -XX:MaxPermSize=256m/,"-Xms512m -Xmx512m")}1' /etc/default/puppetserver > tmp.txt && mv tmp.txt /etc/default/puppetserver
+      sudo echo "*" | sudo tee -a /etc/puppetlabs/puppet/autosign.conf
+      sudo echo "autosign = true" | sudo tee -a /etc/puppetlabs/puppet/puppet.conf
+      sudo echo "certname=master.example.com" | sudo tee -a /etc/puppetlabs/puppet/puppet.conf
+      sudo echo "[agent]" | sudo tee -a /etc/puppetlabs/puppet/puppet.conf
+      sudo echo "certname=node.example.com" | sudo tee -a /etc/puppetlabs/puppet/puppet.conf
+      sudo echo "exec { 'apt-get update': path => '/usr/bin' } package { "nginx": ensure => installed } service { "nginx": require => Package["nginx"], ensure => running, enable => true }" | sudo tee -a /etc/puppetlabs/code/environments/production/manifests/default.pp
+      sudo systemctl enable puppetserver
+      sudo systemctl start puppetserver
+    SHELL
+  end
+  # Puppet Node configuration
+  config.vm.define "pnode" do |pn|
+    pn.vm.network "private_network", ip: "10.10.10.12"
+    pn.vm.provision "shell", :inline => <<-SHELL
+		  sudo echo "10.10.10.11 master.example.com" | sudo tee -a /etc/hosts
+      sudo echo "10.10.10.12 node.example.com" | sudo tee -a /etc/hosts
+  		apt-get update
+  		apt-get install -y puppet
+      sudo puppet agent --enable
+      sudo echo "autosign = true" | sudo tee -a /etc/puppet/puppet.conf
+      sudo echo "certname=master.example.com" | sudo tee -a /etc/puppet/puppet.conf
+      sudo echo "[agent]" | sudo tee -a /etc/puppet/puppet.conf
+      sudo echo "certname=node.example.com" | sudo tee -a /etc/puppet/puppet.conf
+  	SHELL
+	  pn.vm.provision "puppet_server" do |pup|
+    		pup.puppet_node = "nginxplease"
+    		pup.puppet_server = "master.example.com"
+	      pup.options = "--verbose --waitforcert 10"
+    end
+  end
+end
