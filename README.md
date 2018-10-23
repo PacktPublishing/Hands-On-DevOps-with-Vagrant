@@ -40,8 +40,7 @@ With the following software and hardware list you can run all code files present
 | Chapter  | Software required                    | Hardware required                        |OS required                        |
 | -------- | ------------------------------------ | ---------------------------------------- | --------------------------------- |
 | 1-14     | VirtualBox                           | Processor: 1.4 Ghz Intel Core i5         | macOS High Sierra version 10.13.5 |
-|          | Vagrant | Memory / RAM: 8Gb 1600 MHz DDR3 | Ubuntu 16.04.4 LTS Xenial Xerus (This is the Operating System
-                                                        used within the Vagrant Machine) |
+|          | Vagrant                              | Memory / RAM: 8Gb 1600 MHz DDR3          | Ubuntu 16.04.4 LTS Xenial Xerus  |
 |          |                                      | Graphics: Intel HD Graphics 5000 1536 MB |  |
 
 We also provide a PDF file that has color images of the screenshots/diagrams used in this book. [Click here to download it](https://www.packtpub.com/sites/default/files/downloads/9781789138054_ColorImages.pdf).
