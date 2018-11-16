@@ -1,6 +1,6 @@
 # Hands-On DevOps with Vagrant
 
-<a href="https://www.packtpub.com/virtualization-and-cloud/hands-devops-vagrant?utm_source=github&utm_medium=repository&utm_campaign=9781789138054 "><img src="https://d255esdrn735hr.cloudfront.net/sites/default/files/imagecache/ppv4_main_book_cover/B10654.png" alt="Hands-On DevOps with Vagrant" height="256px" align="right"></a>
+<a href="https://www.packtpub.com/virtualization-and-cloud/hands-devops-vagrant?utm_source=github&utm_medium=repository&utm_campaign=9781789138054 "><img src="https://www.packtpub.com/sites/default/files/cover_12.png" alt="Hands-On DevOps with Vagrant" height="256px" align="right"></a>
 
 This is the code repository for [Hands-On DevOps with Vagrant](https://www.packtpub.com/virtualization-and-cloud/hands-devops-vagrant?utm_source=github&utm_medium=repository&utm_campaign=9781789138054 ), published by Packt.
 
