@@ -1,7 +1,3 @@
-## [Get this title for $10 on Packt's Spring Sale](https://www.packt.com/B10654?utm_source=github&utm_medium=packt-github-repo&utm_campaign=spring_10_dollar_2022)
------
-For a limited period, all eBooks and Videos are only $10. All the practical content you need \- by developers, for developers
-
 # Hands-On DevOps with Vagrant
 
 <a href="https://www.packtpub.com/virtualization-and-cloud/hands-devops-vagrant?utm_source=github&utm_medium=repository&utm_campaign=9781789138054 "><img src="https://www.packtpub.com/sites/default/files/cover_12.png" alt="Hands-On DevOps with Vagrant" height="256px" align="right"></a>
